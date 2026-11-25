@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KONTRAKIN - Admin Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="k0ntrakin2-admin.css" />
+  </head>
+  <body>
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <span class="brand-mark">K</span>
+        <div><strong>KONTRAKIN</strong><small>ADMIN PANEL</small></div>
+      </div>
+      <div class="menu-label">MENU UTAMA</div>
+      <nav>
+        <button class="nav-item active" data-view="dashboard">▦ Dashboard</button>
+        <button class="nav-item" data-view="kontrakan">⌂ Data Kontrakan</button>
+        <button class="nav-item" data-view="penyewa">♙ Data Penyewa</button>
+        <button class="nav-item" data-view="penyewaan">▤ Penyewaan</button>
+        <button class="nav-item" data-view="pembayaran">▣ Pembayaran</button>
+        <button class="nav-item" data-view="promo">◇ Kelola Promo</button>
+      </nav>
+      <div class="side-bottom">
+        <div class="help"><strong>Butuh bantuan?</strong><p>Kelola data kontrakan dengan mudah melalui KONTRAKIN.</p></div>
+        <button class="logout" data-act="logout">↪ Keluar</button>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="burger" data-act="menu" aria-label="Menu">☰</button>
+        <div><small>MANAGEMENT SYSTEM</small><h1 id="pageTitle">Dashboard</h1></div>
+        <div class="me">
+          <span class="avatar" id="meAvatar">A</span>
+          <div><strong id="meName">Administrator</strong><small>Admin KONTRAKIN</small></div>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="view active" id="v-dashboard">
+          <h2>Selamat Datang, Admin! 👋</h2>
+          <p class="sub">Berikut ringkasan aktivitas website KONTRAKIN.</p>
+          <div class="stats" id="stats"></div>
+          <div class="card">
+            <h3>Pengajuan Penyewaan Terbaru</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Penyewa</th><th>Kontrakan</th><th>Tanggal</th><th>Status</th></tr></thead>
+              <tbody id="tbRecent"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <section class="view" id="v-kontrakan">
+          <h2>Data Kontrakan</h2>
+          <p class="sub">Kelola informasi kontrakan yang tersedia.</p>
+          <button class="btn primary" data-act="add-prop">+ Tambah Kontrakan</button>
+          <div class="card"><div class="table-wrap"><table>
+            <thead><tr><th>Nama</th><th>Lokasi</th><th>Harga</th><th>Kamar</th><th>Status</th><th>Aksi</th></tr></thead>
+            <tbody id="tbProp"></tbody>
+          </table></div></div>
+        </section>
+
+        <section class="view" id="v-penyewa">
+          <h2>Data Penyewa</h2>
+          <p class="sub">Informasi pengguna yang telah mendaftar.</p>
+          <div class="card"><div class="table-wrap"><table>
+            <thead><tr><th>Nama Penyewa</th><th>Email</th><th>Nomor Telepon</th></tr></thead>
+            <tbody id="tbTenant"></tbody>
+          </table></div></div>
+        </section>
+
+        <section class="view" id="v-penyewaan">
+          <h2>Pengajuan Penyewaan</h2>
+          <p class="sub">Kelola permintaan penyewaan dari pengguna.</p>
+          <div class="card"><div class="table-wrap"><table>
+            <thead><tr><th>Penyewa</th><th>Kontrakan</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr></thead>
+            <tbody id="tbRent"></tbody>
+          </table></div></div>
+        </section>
+
+        <section class="view" id="v-pembayaran">
+          <h2>Data Pembayaran</h2>
+          <p class="sub">Monitor transaksi pembayaran penyewa.</p>
+          <div class="card"><div class="table-wrap"><table>
+            <thead><tr><th>Penyewa</th><th>Metode</th><th>Jumlah</th><th>Status</th><th>Aksi</th></tr></thead>
+            <tbody id="tbPay"></tbody>
+          </table></div></div>
+        </section>
+
+        <section class="view" id="v-promo">
+          <h2>Kelola Promo</h2>
+          <p class="sub">Informasi promo dan diskon KONTRAKIN.</p>
+          <button class="btn primary" data-act="add-promo">+ Tambah Promo</button>
+          <div class="card"><div class="table-wrap"><table>
+            <thead><tr><th>Kontrakan</th><th>Diskon</th><th>Harga Promo</th><th>Status</th><th>Aksi</th></tr></thead>
+            <tbody id="tbPromo"></tbody>
+          </table></div></div>
+        </section>
+
+        <footer>© 2026 KONTRAKIN. All Rights Reserved.</footer>
+      </main>
+    </div>
+
+    <!-- MODAL KONTRAKAN -->
+    <div class="modal hidden" id="propModal">
+      <div class="modal-card">
+        <button class="x" data-act="close">×</button>
+        <h3 id="propTitle">Tambah Kontrakan</h3>
+        <form id="propForm" class="form">
+          <label>Nama kontrakan <input name="name" required /></label>
+          <label>Lokasi <input name="area" required placeholder="Contoh: Lowokwaru, Malang" /></label>
+          <div class="cols">
+            <label>Harga / bulan (Rp) <input name="price" type="number" min="0" required /></label>
+            <label>Luas <input name="size" required placeholder="60 m²" /></label>
+          </div>
+          <div class="cols">
+            <label>Kamar tidur <input name="rooms" type="number" min="1" required /></label>
+            <label>Kamar mandi <input name="baths" type="number" min="1" required /></label>
+          </div>
+          <label>Status kontrakan
+            <select name="status">
+              <option value="">Otomatis (ikuti pembayaran)</option>
+              <option value="Tersedia">Tersedia</option>
+              <option value="Disewa">Disewa</option>
+            </select>
+          </label>
+          <label>URL foto <input name="image" type="url" placeholder="https://..." /></label>
+          <label>Deskripsi <textarea name="desc" rows="3" required></textarea></label>
+          <button class="btn primary" type="submit">Simpan</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL PROMO -->
+    <div class="modal hidden" id="promoModal">
+      <div class="modal-card">
+        <button class="x" data-act="close">×</button>
+        <h3>Atur Promo</h3>
+        <form id="promoForm" class="form">
+          <label>Kontrakan <select name="id" id="promoProp"></select></label>
+          <label>Diskon (%) <input name="discount" type="number" min="1" max="90" required /></label>
+          <button class="btn primary" type="submit">Simpan promo</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="modal login hidden" id="login">
+      <div class="modal-card">
+        <div class="brand dark"><span class="brand-mark">K</span><div><strong>KONTRAKIN</strong><small>ADMIN PANEL</small></div></div>
+        <form id="authForm" class="form">
+          <label class="reg-only hidden">Nama lengkap <input name="name" /></label>
+          <label>Email <input name="email" type="email" required placeholder="admin@kontrakin.com" /></label>
+          <label>Password <input name="password" type="password" required minlength="6" /></label>
+          <label class="reg-only hidden">Kode akses admin <input name="code" /></label>
+          <button class="btn primary" id="loginBtn" type="submit">Login</button>
+          <p class="hint" id="loginHint"></p>
+          <button class="link" type="button" id="switchMode"></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="k0ntrakin2-admin.js"></script>
+  </body>
+</html>

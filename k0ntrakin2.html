@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kontrakin - Temukan Kontrakan Impianmu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="k0ntrakin2.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#" data-page="home">
+        <span class="brand-mark">K</span>
+        <span>kontra<span class="brand-green">kin.</span></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#" data-page="home" class="nav-link active">Beranda</a>
+        <a href="#" data-page="search" class="nav-link">Cari Kontrakan</a>
+        <a href="#" data-page="favorites" class="nav-link tenant-only"
+          >Favorit</a
+        >
+        <a href="#" data-page="promo" class="nav-link">Promo</a>
+        <a href="#" data-page="payment" class="nav-link tenant-only"
+          >Pembayaran</a
+        >
+      </nav>
+
+      <div class="header-actions">
+        <button
+          class="btn btn-outline guest-only"
+          data-action="open-auth"
+          data-mode="register"
+        >
+          Daftar
+        </button>
+        <button
+          class="btn btn-primary guest-only"
+          data-action="open-auth"
+          data-mode="login"
+        >
+          Login
+        </button>
+
+        <div class="profile-wrap tenant-only" id="profileWrap">
+          <button class="profile-button" id="profileButton">
+            <span class="avatar" id="profileAvatar">P</span>
+            <span class="profile-name" id="profileName">Profil</span>
+            <span class="chevron">⌄</span>
+          </button>
+
+          <div class="profile-menu hidden" id="profileMenu">
+            <div class="profile-menu-head">
+              <strong id="menuUserName">Pengguna</strong>
+              <small id="menuUserEmail">email@example.com</small>
+            </div>
+            <button data-page="profile">Profil Saya</button>
+            <button data-page="payment">Riwayat Pembayaran</button>
+            <button data-action="logout" class="logout-button">Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- BERANDA -->
+      <section class="page active" id="page-home">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="eyebrow">TEMUKAN TEMPAT TINGGAL TERBAIK</span>
+            <h1>
+              Temukan kontrakan nyaman,
+              <span>lebih mudah.</span>
+            </h1>
+            <p>
+              Jelajahi pilihan kontrakan di berbagai daerah. Temukan tempat yang
+              cocok dengan kebutuhan dan anggaranmu bersama Kontrakin.
+            </p>
+
+            <div class="hero-buttons">
+              <button class="btn btn-primary btn-large" data-page="search">
+                Cari Kontrakan →
+              </button>
+            </div>
+
+            <div class="hero-points">
+              <span>✓ Pilihan beragam</span>
+              <span>✓ Informasi jelas</span>
+              <span>✓ Proses praktis</span>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-image">
+              <img
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80"
+                alt="Rumah kontrakan"
+              />
+            </div>
+            <div class="floating-note">
+              <span class="note-icon">⌂</span>
+              <div>
+                <strong>Tempat nyaman</strong>
+                <small>Mulai dari kebutuhanmu</small>
+              </div>
+            </div>
+            <div class="floating-dot dot-one"></div>
+            <div class="floating-dot dot-two"></div>
+          </div>
+        </div>
+
+        <section class="section container">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">PILIHAN UNTUKMU</span>
+              <h2>Kontrakan pilihan</h2>
+              <p>Beberapa tempat yang bisa kamu jelajahi.</p>
+            </div>
+            <button class="text-button" data-page="search">
+              Lihat semua kontrakan →
+            </button>
+          </div>
+          <div class="property-grid" id="homeFeatured"></div>
+        </section>
+
+        <section class="promo-strip container">
+          <div>
+            <span class="eyebrow light-eyebrow">PENAWARAN SPESIAL</span>
+            <h2>Temukan harga yang lebih hemat!</h2>
+            <p>Cek kontrakan dengan promo dan diskon pilihan.</p>
+          </div>
+          <button class="btn btn-light" data-page="promo">Lihat Promo →</button>
+        </section>
+      </section>
+
+      <!-- CARI KONTRAKAN -->
+      <section class="page" id="page-search">
+        <div class="page-banner compact-banner">
+          <span class="eyebrow">KATALOG HUNIAN</span>
+          <h1>Cari kontrakan</h1>
+          <p>Pilih kontrakan yang sesuai dengan kebutuhanmu.</p>
+        </div>
+
+        <section class="container section">
+          <div class="filter-bar">
+            <label class="search-field">
+              <span>⌕</span>
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Cari nama atau daerah kontrakan..."
+              />
+            </label>
+
+            <select id="areaFilter">
+              <option value="">Semua daerah</option>
+            </select>
+
+            <select id="sortFilter">
+              <option value="default">Urutkan: Rekomendasi</option>
+              <option value="low">Harga terendah</option>
+              <option value="high">Harga tertinggi</option>
+            </select>
+          </div>
+
+          <div class="results-line">
+            <span id="resultCount">10 kontrakan ditemukan</span>
+            <span>Geser halaman untuk melihat pilihan lainnya</span>
+          </div>
+
+          <div class="property-grid" id="searchGrid"></div>
+
+          <div class="pagination">
+            <button class="page-arrow" id="prevSlide">←</button>
+            <span id="slideLabel">1 / 2</span>
+            <button class="page-arrow" id="nextSlide">→</button>
+          </div>
+        </section>
+      </section>
+
+      <!-- FAVORIT -->
+      <section class="page" id="page-favorites">
+        <div class="page-banner compact-banner">
+          <span class="eyebrow">DAFTAR SIMPANAN</span>
+          <h1>Kontrakan favorit</h1>
+          <p>Tempat yang kamu simpan agar mudah ditemukan kembali.</p>
+        </div>
+
+        <section class="container section">
+          <div id="favoritesGrid" class="property-grid"></div>
+
+          <div id="emptyFavorites" class="empty-state hidden">
+            <div>♡</div>
+            <h3>Belum ada kontrakan favorit</h3>
+            <p>Tekan ikon hati pada kontrakan yang kamu sukai.</p>
+            <button class="btn btn-primary" data-page="search">
+              Jelajahi kontrakan
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <!-- PROMO -->
+      <section class="page" id="page-promo">
+        <div class="page-banner compact-banner">
+          <span class="eyebrow">HEMAT BERSAMA KONTRAKIN</span>
+          <h1>Promo kontrakan</h1>
+          <p>Lihat penawaran harga spesial yang tersedia.</p>
+        </div>
+
+        <section class="container section">
+          <div class="property-grid" id="promoGrid"></div>
+        </section>
+      </section>
+
+      <!-- PENGAJUAN SEWA -->
+      <section class="page" id="page-rent">
+        <div class="page-banner compact-banner">
+          <span class="eyebrow">PENGAJUAN PENYEWAAN</span>
+          <h1>Formulir sewa kontrakan</h1>
+          <p>Lengkapi data pengajuan untuk kontrakan pilihanmu.</p>
+        </div>
+
+        <section class="container narrow section">
+          <div id="rentPropertySummary"></div>
+
+          <form id="rentForm" class="form-card">
+            <h2>Data penyewa</h2>
+
+            <div class="form-grid">
+              <label
+                >Nama lengkap
+                <input name="name" id="rentName" required />
+              </label>
+
+              <label
+                >Email
+                <input name="email" id="rentEmail" type="email" required />
+              </label>
+
+              <label
+                >Nomor telepon
+                <input
+                  name="phone"
+                  type="tel"
+                  required
+                  placeholder="08xxxxxxxxxx"
+                />
+              </label>
+
+              <label
+                >Tanggal mulai sewa
+                <input name="startDate" type="date" required />
+              </label>
+
+              <label class="full-field"
+                >Durasi sewa
+                <select name="duration" required>
+                  <option value="">Pilih durasi</option>
+                  <option value="1 bulan">1 bulan</option>
+                  <option value="3 bulan">3 bulan</option>
+                  <option value="6 bulan">6 bulan</option>
+                  <option value="12 bulan">12 bulan</option>
+                </select>
+              </label>
+
+              <label class="full-field"
+                >Catatan (opsional)
+                <textarea
+                  name="notes"
+                  rows="3"
+                  placeholder="Tambahkan catatan jika ada"
+                ></textarea>
+              </label>
+            </div>
+
+            <div class="form-note">
+              Dengan mengirim formulir, pengajuan akan dicatat pada website demo
+              ini. Pengajuan belum berarti kontrakan telah resmi disewa.
+            </div>
+
+            <button class="btn btn-primary btn-large full-button" type="submit">
+              Kirim pengajuan & lanjut pembayaran →
+            </button>
+          </form>
+        </section>
+      </section>
+
+      <!-- PEMBAYARAN -->
+      <section class="page" id="page-payment">
+        <div class="page-banner compact-banner">
+          <span class="eyebrow">REGISTRASI PEMBAYARAN</span>
+          <h1>Pembayaran</h1>
+          <p>Catat metode pembayaran dan informasi transaksi pengajuanmu.</p>
+        </div>
+
+        <section class="container narrow section">
+          <div id="paymentContent"></div>
+          <div id="paymentHistory" class="history-card">
+            <h2>Riwayat pengajuan & pembayaran</h2>
+            <div id="historyList"></div>
+          </div>
+        </section>
+      </section>
+
+      <!-- PROFIL -->
+      <section class="page" id="page-profile">
+        <div class="page-banner compact-banner">
+          <span class="eyebrow">AKUN PENYEWA</span>
+          <h1>Profil saya</h1>
+          <p>Informasi akun yang digunakan pada Kontrakin.</p>
+        </div>
+
+        <section class="container narrow section">
+          <div class="profile-card">
+            <div class="large-avatar" id="profileLargeAvatar">P</div>
+            <h2 id="profileFullName">Pengguna</h2>
+            <p id="profileFullEmail">email@example.com</p>
+
+            <div class="profile-details">
+              <div>
+                <span>Nama</span>
+                <strong id="profileDetailName">-</strong>
+              </div>
+              <div>
+                <span>Email</span>
+                <strong id="profileDetailEmail">-</strong>
+              </div>
+            </div>
+
+            <button class="btn btn-outline full-button" data-action="logout">
+              Logout
+            </button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="brand footer-brand" href="#" data-page="home">
+          <span class="brand-mark">K</span>
+          <span>kontra<span class="brand-green">kin.</span></span>
+        </a>
+        <p>Temukan tempat tinggal yang tepat bersama Kontrakin.</p>
+        <small
+          >© 2026 Kontrakin. Website prototype untuk keperluan
+          pembelajaran.</small
+        >
+      </div>
+    </footer>
+
+    <!-- MODAL REGISTRASI DAN LOGIN -->
+    <div class="modal-backdrop hidden" id="authModal">
+      <div class="modal-card auth-card">
+        <button class="modal-close" data-action="close-auth">×</button>
+
+        <div class="modal-heading">
+          <span class="brand-mark">K</span>
+          <h2 id="authTitle">Buat akun Kontrakin</h2>
+          <p id="authSubtitle">
+            Daftar terlebih dahulu untuk menggunakan fitur penyewa.
+          </p>
+        </div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-auth-tab="register">
+            Registrasi
+          </button>
+          <button class="auth-tab" data-auth-tab="login">Login</button>
+        </div>
+
+        <form id="registerForm" class="auth-form">
+          <label
+            >Nama lengkap
+            <input name="name" required placeholder="Nama lengkap" />
+          </label>
+
+          <label
+            >Email
+            <input
+              name="email"
+              type="email"
+              required
+              placeholder="nama@email.com"
+            />
+          </label>
+
+          <label
+            >Password
+            <input
+              name="password"
+              type="password"
+              minlength="6"
+              required
+              placeholder="Minimal 6 karakter"
+            />
+          </label>
+
+          <button class="btn btn-primary full-button" type="submit">
+            Buat akun
+          </button>
+
+          <p class="auth-switch">
+            Sudah punya akun?
+            <button type="button" data-auth-tab="login">Login di sini</button>
+          </p>
+        </form>
+
+        <form id="loginForm" class="auth-form hidden">
+          <label
+            >Email
+            <input
+              name="email"
+              type="email"
+              required
+              placeholder="nama@email.com"
+            />
+          </label>
+
+          <label
+            >Password
+            <input
+              name="password"
+              type="password"
+              required
+              placeholder="Password akun"
+            />
+          </label>
+
+          <button class="btn btn-primary full-button" type="submit">
+            Login
+          </button>
+
+          <p class="auth-switch">
+            Belum punya akun?
+            <button type="button" data-auth-tab="register">
+              Registrasi dahulu
+            </button>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL DETAIL KONTRAKAN -->
+    <div class="modal-backdrop hidden" id="detailModal">
+      <div class="modal-card detail-modal">
+        <button class="modal-close" data-action="close-detail">×</button>
+        <div id="detailContent"></div>
+      </div>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="k0ntrakin2.js"></script>
+  </body>
+</html>

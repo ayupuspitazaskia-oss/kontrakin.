@@ -1,0 +1,12 @@
+{
+  "name": "kontrakin",
+  "version": "1.0.0",
+  "description": "Website Kontrakin (penyewa dan admin) dengan server data bersama",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
